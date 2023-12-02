@@ -1,12 +1,22 @@
+import fs from 'fs'
 
+const lines = fs.readFileSync('./input.txt', 'utf-8').split('\n')
 
-function adventor() {
-    // separate input by line break
+const initialValue = 0
 
-    // get first integer in string and last integer of string
+const sum = lines.reduce(lineParser, initialValue)
 
-    // combine them into a single integer
+console.log(`Calibration Value: ${sum}`)
 
-    // return sum of all values
-    return separatedLines
+function lineParser(accumulator, entry) {
+
+    let entryNumbers = entry.match(/\d/g)
+
+    if (entryNumbers) {
+        let num = entryNumbers[0] + entryNumbers[entryNumbers.length - 1]
+        return accumulator + Number(num)
+    }
+    else {
+        return accumulator
+    }
 }
